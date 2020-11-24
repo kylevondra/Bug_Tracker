@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <random>
 
@@ -7,14 +8,11 @@
 class Bug
 {
 private:
-	string ID;
-	string subject;
-	string priority;
-	string category;
-	string assignee;
-	string startDate;
-	string endDate;
-	string version;
+	int ID; // randomly generated
+	string Title;
+	int priority; // enum (P0, P1, P2)
+	int status; // enum (new, in-progress, completed)
+	string assignee; // email
 
 private:
 	
