@@ -2,28 +2,35 @@
 
 #include <string>
 #include <random>
+#include <vector>
 
 #define string std::string
+
+typedef enum { P1, P2, P3 } priority;
+typedef enum { New, InProgress, Completed } status; // enum (new, in-progress, completed)
 
 class Bug
 {
 private:
 	int ID; // randomly generated
 	string title;
-	int priority; // enum (P0, P1, P2)
-	int status; // enum (new, in-progress, completed)
+	priority p;
+	status s;
 	string assignee; // email
 
 public:
 	Bug() {}; // default constructor
-	Bug(int ID_c, string title_c, int priority_c, int status_c, string assignee_c) : 
-		ID(ID_c), 
-		title(title_c), 
-		priority(priority_c), 
-		status(status_c), 
+	Bug(int ID_c, string title_c, priority priority_c, status status_c, string assignee_c) :
+		ID(ID_c),
+		title(title_c),
+		p(priority_c),
+		s(status_c),
 		assignee(assignee_c) {};
 
-	
+	//creates random Bug for writing to file
+	Bug rBug();
+	void printBug();
 };
+
 
 
