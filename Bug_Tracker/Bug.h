@@ -32,6 +32,7 @@ public:
 	//creates random Bug for writing to file
 	Bug rBug();
 	void printBug();
+	//creates and writes to Bugs.txt
 	int fileBug(std::vector<Bug> Bugs);
 };
 
