@@ -3,6 +3,8 @@
 #include <string>
 #include <random>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 #define string std::string
 
@@ -30,6 +32,7 @@ public:
 	//creates random Bug for writing to file
 	Bug rBug();
 	void printBug();
+	int fileBug(std::vector<Bug> Bugs);
 };
 
 

@@ -14,10 +14,10 @@ Bug Bug::rBug() {
 	//concatonate each one to create random emails for the file, add more if you want
 	std::vector<string> n{ "Bob", "Steven", "Joshua45", "CSS445", "RobertsR", "Jeff", "Nich", "Zach", "Nate", "Donovan" };
 	std::vector<string> e{ "@yahoo.com", "@gmail.com", "@aol.net", "@hotmail.com" };
-	std::vector<string> t{ "Code does not compile", "Syntax error", "There is no text in code", "There are literal bugs in the server", "Wrong coding language"};
+	std::vector<string> t{ "Code does not compile", "Syntax error", "There is no text in code", "There are literal bugs in the server", "Wrong coding language" };
 
 
-	return Bug(dice(1,999999), t[dice(0, t.size()-1)], priority(dice(0,2)), status(dice(0,2)), n[dice(0, n.size() - 1)] + e[dice(0, e.size() - 1)]);
+	return Bug(dice(1, 999999), t[dice(0, t.size() - 1)], priority(dice(0, 2)), status(dice(0, 2)), n[dice(0, n.size() - 1)] + e[dice(0, e.size() - 1)]);
 }
 
 void Bug::printBug() {
@@ -70,4 +70,21 @@ void Bug::printBug() {
 	}
 	//finishes print statement
 	std::cout << assignee << std::endl;
+}
+
+//Write to file
+int Bug::fileBug(std::vector<Bug> Bugs) {
+	std::fstream file;
+	file.open("Bugs.txt", std::ios::out);
+
+	if (!file) {
+		throw std::runtime_error("error creating file");
+		return 0;
+	}
+
+	for (int i = 0; i < Bugs.size(); i++) {
+		file << Bugs[i].ID << "," << Bugs[i].title << "," << Bugs[i].p << "," << Bugs[i].s << "," << Bugs[i].assignee << std::endl;
+	};
+	file.close();
+	return 1;
 }
