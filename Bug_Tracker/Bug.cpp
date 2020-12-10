@@ -97,6 +97,63 @@ void Bug::fileBug() {
 	file.close();
 }
 
+//read from file
+/*
+std::vector<Bug> Bug::readBug() {
+	std::string line, word;
+	std::vector<string> temp;
+
+	//open and test bugs.txt
+	std::ifstream file("Bugs.txt");
+	if (!file.is_open()) {
+		throw std::runtime_error("Could not open file Bugs.txt");
+	}
+
+	//add all strings in bugs.txt seperated by comma to temp vector
+	if (file.good()) {
+		while (std::getline(file, line)) {
+			std::stringstream s(line);
+			while (std::getline(s, work)) {
+				temp.push_back(word);
+			}
+		}
+	}
+
+	for (int i = 1; i < temp.size(); i++) {
+		string a, b, c, d, e, f;
+
+		std::vector<string>temp2;
+		a = test[i];
+		std::stringstream s_stream(a);
+		while (s_stream.good()) {
+			string substr;
+			std::getline(s_stream, substr, ',');
+			temp2.push_back(substr);
+		}
+
+		b = temp[0];
+		c = temp[1];
+		d = temp[2];
+		e = temp[3];
+		f = temp[4];
+
+		int b2 = stoi(b);
+		string c2 = c;
+		priority d2 = stoi(d);
+		status e2 = stoi(e);
+		string f2 = f;
+
+		Bug p{ b2,c2,d2,e2,f2 };
+		temp.push_back(p);
+
+		temp1.clear();
+	}
+	return temp;
+}
+*/
+
+
+
 void Bug::fileBug(std::vector<Bug*> bugs) {
 	for (Bug* b : bugs) {
 		b->fileBug();
