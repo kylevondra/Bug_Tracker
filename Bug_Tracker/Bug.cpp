@@ -30,6 +30,7 @@ void Bug::printBug() {
 		}
 		else if (ID > 999) {
 			i = "00" + i;
+			// test
 		}
 		else if (ID > 99) {
 			i = "000" + i;
