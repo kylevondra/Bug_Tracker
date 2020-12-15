@@ -37,8 +37,10 @@ public:
 	//creates and writes to Bugs.txt
 	void fileBug();
 	void fileBug(std::vector<Bug*> bugs);
+
 	//read from file
-	//std::vector<Bug> readBug();
+	std::vector<Bug> readBug();
+
 
 	void setTitle(string title);
 	void setPriority(int priority);

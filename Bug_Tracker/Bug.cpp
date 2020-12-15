@@ -10,6 +10,12 @@ int dice(int num1, int num2) {
 	return dis(gen);
 }
 
+//function for testing if file exists
+bool fexists(const char* filename) {
+	std::ifstream ifile(filename);
+	return (bool)ifile;
+}
+
 void Bug::generateID() {
 	this->ID = dice(1, 999999);
 }
@@ -57,26 +63,26 @@ void Bug::printBug() {
 
 	//prints priority
 	switch (p) {
-	case 1:
+	case 0:
 		std::cout << "Priority 1, ";
 		break;
-	case 2:
+	case 1:
 		std::cout << "Priority 2, ";
 		break;
-	case 3:
+	case 2:
 		std::cout << "Priority 3, ";
 		break;
 	};
 
 	//prints status
 	switch (s) {
-	case 1:
+	case 0:
 		std::cout << "New, ";
 		break;
-	case 2:
+	case 1:
 		std::cout << "In Progress, ";
 		break;
-	case 3:
+	case 2:
 		std::cout << "Completed, ";
 		break;
 	}
@@ -97,11 +103,15 @@ void Bug::fileBug() {
 	file.close();
 }
 
+
+
+
 //read from file
-/*
+
 std::vector<Bug> Bug::readBug() {
-	std::string line, word;
+	string line, word;
 	std::vector<string> temp;
+	std::vector<Bug> Bugs;
 
 	//open and test bugs.txt
 	std::ifstream file("Bugs.txt");
@@ -113,7 +123,7 @@ std::vector<Bug> Bug::readBug() {
 	if (file.good()) {
 		while (std::getline(file, line)) {
 			std::stringstream s(line);
-			while (std::getline(s, work)) {
+			while (std::getline(s, word)) {
 				temp.push_back(word);
 			}
 		}
@@ -123,7 +133,7 @@ std::vector<Bug> Bug::readBug() {
 		string a, b, c, d, e, f;
 
 		std::vector<string>temp2;
-		a = test[i];
+		a = temp[i];
 		std::stringstream s_stream(a);
 		while (s_stream.good()) {
 			string substr;
@@ -131,26 +141,26 @@ std::vector<Bug> Bug::readBug() {
 			temp2.push_back(substr);
 		}
 
-		b = temp[0];
-		c = temp[1];
-		d = temp[2];
-		e = temp[3];
-		f = temp[4];
+		b = temp2[0];
+		c = temp2[1];
+		d = temp2[2];
+		e = temp2[3];
+		f = temp2[4];
 
 		int b2 = stoi(b);
 		string c2 = c;
-		priority d2 = stoi(d);
-		status e2 = stoi(e);
+		priority d2 = priority(stoi(d));
+		status e2 = status(stoi(e));
 		string f2 = f;
 
 		Bug p{ b2,c2,d2,e2,f2 };
-		temp.push_back(p);
+		Bugs.push_back(p);
 
-		temp1.clear();
+		temp2.clear();
 	}
-	return temp;
+	return Bugs;
 }
-*/
+
 
 
 
