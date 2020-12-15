@@ -1,7 +1,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <bits/stdc++.h>
+#pragma warning(disable : 4996) // I keep getting a compiler error, C4996, that's preventing me from compiling, this just removes that flag and lets me compile
+
+//#include <stdio.h>
+//#include <bits/stdc++.h>
 #include <iostream>
 
 //transform a string to lowercase

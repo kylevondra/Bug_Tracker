@@ -117,6 +117,7 @@ std::vector<Bug> Bug::readBug() {
 	//open and test bugs.txt
 	std::ifstream file("Bugs.txt");
 	if (!file.is_open()) {
+		//std::cout << "Could not open file Bugs.txt";
 		throw std::runtime_error("Could not open file Bugs.txt");
 	}
 
