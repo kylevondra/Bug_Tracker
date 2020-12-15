@@ -1,5 +1,6 @@
 #include "Bug.h"
 #include <iostream>
+#include <iomanip>
 
 //dice1.cpp from class for rng
 int dice(int num1, int num2) {
@@ -7,6 +8,20 @@ int dice(int num1, int num2) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(num1, num2);
 	return dis(gen);
+}
+
+//function for testing if file exists
+bool fexists(const char* filename) {
+	std::ifstream ifile(filename);
+	return (bool)ifile;
+}
+
+void Bug::generateID() {
+	this->ID = dice(1, 999999);
+}
+
+Bug::Bug() {
+	generateID();
 }
 
 Bug Bug::rBug() {
@@ -23,6 +38,7 @@ Bug Bug::rBug() {
 void Bug::printBug() {
 
 	//this code adds 0s to front of id to make it 6 digits when displayed
+	/*
 	string i = std::to_string(ID);
 	if (ID < 99999) {
 		if (ID > 9999) {
@@ -40,9 +56,11 @@ void Bug::printBug() {
 		}
 		else { i = "00000" + i; }
 	}
+	*/
 
 	//actual print statement
-	std::cout << i << ", " << title << ", ";// << p << ", " << s << ", " << assignee << std::endl;
+	//setw and setfill do same as above
+	std::cout << std::setw(6) << std::setfill('0') << ID << ", " << title << ", ";// << p << ", " << s << ", " << assignee << std::endl;
 
 	//prints priority
 	switch (p) {
@@ -74,18 +92,107 @@ void Bug::printBug() {
 }
 
 //Write to file
-int Bug::fileBug(std::vector<Bug> Bugs) {
+void Bug::fileBug() {
 	std::fstream file;
-	file.open("Bugs.txt", std::ios::out);
+	file.open("Bugs.txt", std::ios::out | std::ios::app);
 
 	if (!file) {
 		throw std::runtime_error("error creating file");
-		return 0;
 	}
 
-	for (int i = 0; i < Bugs.size(); i++) {
-		file << Bugs[i].ID << "," << Bugs[i].title << "," << Bugs[i].p << "," << Bugs[i].s << "," << Bugs[i].assignee << std::endl;
-	};
+	file << this->ID << "," << this->title << "," << this->p << "," << this->s << "," << this->assignee << std::endl;
 	file.close();
-	return 1;
+}
+
+
+
+
+//read from file
+
+std::vector<Bug> Bug::readBug() {
+	string line, word;
+	std::vector<string> temp;
+	std::vector<Bug> Bugs;
+
+	//open and test bugs.txt
+	std::ifstream file("Bugs.txt");
+	if (!file.is_open()) {
+		throw std::runtime_error("Could not open file Bugs.txt");
+	}
+
+	//add all strings in bugs.txt seperated by comma to temp vector
+	if (file.good()) {
+		while (std::getline(file, line)) {
+			std::stringstream s(line);
+			while (std::getline(s, word)) {
+				temp.push_back(word);
+			}
+		}
+	}
+
+	for (int i = 1; i < temp.size(); i++) {
+		string a, b, c, d, e, f;
+
+		std::vector<string>temp2;
+		a = temp[i];
+		std::stringstream s_stream(a);
+		while (s_stream.good()) {
+			string substr;
+			std::getline(s_stream, substr, ',');
+			temp2.push_back(substr);
+		}
+
+		b = temp2[0];
+		c = temp2[1];
+		d = temp2[2];
+		e = temp2[3];
+		f = temp2[4];
+
+		int b2 = stoi(b);
+		string c2 = c;
+		priority d2 = priority(stoi(d));
+		status e2 = status(stoi(e));
+		string f2 = f;
+
+		Bug p{ b2,c2,d2,e2,f2 };
+		Bugs.push_back(p);
+
+		temp2.clear();
+	}
+	return Bugs;
+}
+
+
+
+
+void Bug::fileBug(std::vector<Bug*> bugs) {
+	for (Bug* b : bugs) {
+		b->fileBug();
+	};
+}
+
+void Bug::setTitle(string title) {
+	this->title = title;
+}
+
+void Bug::setPriority(int priority) {
+	switch(priority) {
+		case 1: this->p = priority::P1; break;
+		case 2: this->p = priority::P2; break;
+		default:
+		case 3: this->p = priority::P3; break;
+	}
+}
+
+void Bug::setStatus(int status) {
+	switch(status) {
+		default:
+		case 1: this->s = status::NEW; break;
+		case 2: this->s = status::INPROGRESS; break;
+		case 3: this->s = status::COMPLETED; break;
+	}
+}
+
+void Bug::setAssignee(string assignee) {
+	this->assignee = assignee;
 }
