@@ -34,14 +34,16 @@ public:
 	//creates random Bug for writing to file
 	Bug rBug();
 	void printBug();
-	//creates and writes to Bugs.txt
-	void fileBug();
-	void fileBug(std::vector<Bug*> bugs);
-
-	//read from file
-	std::vector<Bug> readBug();
 
 
+	// getters
+	int getID();
+	string getTitle();
+	priority getPriority();
+	status getStatus();
+	string getAssignee();
+
+	// setters
 	void setTitle(string title);
 	void setPriority(int priority);
 	void setStatus(int status);

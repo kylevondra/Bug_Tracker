@@ -60,116 +60,36 @@ void Bug::printBug() {
 
 	//actual print statement
 	//setw and setfill do same as above
-	std::cout << std::setw(6) << std::setfill('0') << ID << ", " << title << ", ";// << p << ", " << s << ", " << assignee << std::endl;
+	std::cout << std::setw(6) << std::setfill('0') << ID << ", " << title << ", " << p << ", " << s << ", " << assignee << std::endl;
+	
 
 	//prints priority
-	switch (p) {
-	case 0:
-		std::cout << "Priority 1, ";
-		break;
-	case 1:
-		std::cout << "Priority 2, ";
-		break;
-	case 2:
-		std::cout << "Priority 3, ";
-		break;
-	};
+	//switch (p) {
+	//case 0:
+	//	std::cout << "Priority 1, ";
+	//	break;
+	//case 1:
+	//	std::cout << "Priority 2, ";
+	//	break;
+	//case 2:
+	//	std::cout << "Priority 3, ";
+	//	break;
+	//};
 
-	//prints status
-	switch (s) {
-	case 0:
-		std::cout << "New, ";
-		break;
-	case 1:
-		std::cout << "In Progress, ";
-		break;
-	case 2:
-		std::cout << "Completed, ";
-		break;
-	}
-	//finishes print statement
-	std::cout << assignee << std::endl;
-}
-
-//Write to file
-void Bug::fileBug() {
-	std::fstream file;
-	file.open("Bugs.txt", std::ios::out | std::ios::app);
-
-	if (!file) {
-		throw std::runtime_error("error creating file");
-	}
-
-	file << this->ID << "," << this->title << "," << this->p << "," << this->s << "," << this->assignee << std::endl;
-	file.close();
-}
-
-
-
-
-//read from file
-
-std::vector<Bug> Bug::readBug() {
-	string line, word;
-	std::vector<string> temp;
-	std::vector<Bug> Bugs;
-
-	//open and test bugs.txt
-	std::ifstream file("Bugs.txt");
-	if (!file.is_open()) {
-		//std::cout << "Could not open file Bugs.txt";
-		throw std::runtime_error("Could not open file Bugs.txt");
-	}
-
-	//add all strings in bugs.txt seperated by comma to temp vector
-	if (file.good()) {
-		while (std::getline(file, line)) {
-			std::stringstream s(line);
-			while (std::getline(s, word)) {
-				temp.push_back(word);
-			}
-		}
-	}
-
-	for (int i = 1; i < temp.size(); i++) {
-		string a, b, c, d, e, f;
-
-		std::vector<string>temp2;
-		a = temp[i];
-		std::stringstream s_stream(a);
-		while (s_stream.good()) {
-			string substr;
-			std::getline(s_stream, substr, ',');
-			temp2.push_back(substr);
-		}
-
-		b = temp2[0];
-		c = temp2[1];
-		d = temp2[2];
-		e = temp2[3];
-		f = temp2[4];
-
-		int b2 = stoi(b);
-		string c2 = c;
-		priority d2 = priority(stoi(d));
-		status e2 = status(stoi(e));
-		string f2 = f;
-
-		Bug p{ b2,c2,d2,e2,f2 };
-		Bugs.push_back(p);
-
-		temp2.clear();
-	}
-	return Bugs;
-}
-
-
-
-
-void Bug::fileBug(std::vector<Bug*> bugs) {
-	for (Bug* b : bugs) {
-		b->fileBug();
-	};
+	////prints status
+	//switch (s) {
+	//case 0:
+	//	std::cout << "New, ";
+	//	break;
+	//case 1:
+	//	std::cout << "In Progress, ";
+	//	break;
+	//case 2:
+	//	std::cout << "Completed, ";
+	//	break;
+	//}
+	////finishes print statement
+	//std::cout << assignee << std::endl;
 }
 
 void Bug::setTitle(string title) {
@@ -196,4 +116,24 @@ void Bug::setStatus(int status) {
 
 void Bug::setAssignee(string assignee) {
 	this->assignee = assignee;
+}
+
+int Bug::getID() {
+	return ID;
+}
+
+string Bug::getTitle() {
+	return title;
+}
+
+priority Bug::getPriority() {
+	return p;
+}
+
+status Bug::getStatus() {
+	return s;
+}
+
+string Bug::getAssignee() {
+	return assignee;
 }

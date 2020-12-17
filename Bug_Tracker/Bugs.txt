@@ -1,1 +1,2 @@
-654165,The first initial bug,P1,INPROGRESS,kyle
+863224,initial bug,1,1,k.vondra95@gmail.com
+514988,the thing isn't doing the thing,3,1,k.vondra95@gmail.com
