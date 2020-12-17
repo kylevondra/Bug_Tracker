@@ -32,7 +32,7 @@ public:
 		assignee(assignee_c) {};
 
 	//creates random Bug for writing to file
-	Bug rBug();
+	
 	void printBug();
 
 

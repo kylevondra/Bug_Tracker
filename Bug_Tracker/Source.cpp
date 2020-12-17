@@ -1,3 +1,7 @@
+//	Kyle Vondra
+//	Nicholas Simons
+
+
 #include <iostream>
 #include <map>
 #include "Bug.h"
@@ -132,7 +136,7 @@ Bug createNewBug() {
 		}
 		else
 			print "Please enter a valid number" << nl;
-	} while (true);
+	} while(true);
 	
 
 	// gets status 
@@ -140,7 +144,7 @@ Bug createNewBug() {
 	do {
 		print "Enter a status between 1 - 3 (1 being NEW, 2 being INPROGRESS, 3 being COMPLETED): ";
 		getline(cin, statusLevel);
-		if (statusLevel != "1" || statusLevel != "2" || statusLevel != "3") {
+		if (statusLevel == "1" || statusLevel == "2" || statusLevel == "3") {
 			// TODO make these the correct status and not an enum
 			int statusLevelInt = stoi(statusLevel);
 			returnBug.setStatus(statusLevelInt);
@@ -148,7 +152,7 @@ Bug createNewBug() {
 		}
 		else
 			print "Please enter a status\n";
-	} while (true);
+	} while(true);
 	
 
 	print "Enter a assignee email: ";
@@ -199,6 +203,9 @@ void getBugsVectorAndStore(std::vector<Bug> bugs) {
 	};
 }
 
+/// <summary>
+/// prints out the main menu 
+/// </summary>
 void printMenu() {
 	print "\n\n===================== MENU =====================\n\n";
 	print "To view all the bugs, type \"print\"" << nl;
@@ -206,9 +213,6 @@ void printMenu() {
 	print "To edit a bug, type \"edit\"" << nl;
 	print "To exit the bug tracker, type \"exit\"" << nl << nl;
 	print "> ";
-	
-	
-
 }
 
 #pragma endregion
@@ -242,18 +246,18 @@ int main() {
 
 		if (input == "edit") {
 			Bug result = searchByID(&bugMap);
-			print "What would you like to edit? (desc, pri, status, assignee): ";
+			print "What would you like to edit? (description, priority, status, assignee): ";
 			string userWantsToEdit;
 			getline(cin, userWantsToEdit);
 
-			if (userWantsToEdit == "desc") {
+			if (userWantsToEdit == "description") {
 				print "Please enter the new title: ";
 				string newTitle;
 				getline(cin, newTitle);
 				result.setTitle(newTitle);
 				print "Title updated!" << nl;
 			}
-			else if (userWantsToEdit == "pri") {
+			else if (userWantsToEdit == "priority") {
 				print "Please enter the new priority level: ";
 				string newPriority;
 				getline(cin, newPriority);
